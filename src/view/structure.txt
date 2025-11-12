@@ -1,0 +1,28 @@
+src/
+├── model/
+│   ├─ Content.java
+│   ├── Article.java
+│   ├── Video.java
+│   ├── Image.java
+│   ├── User.java
+│   ├── Administrator.java
+│   ├── Editor.java
+│   ├── Category.java
+│   ├── Tag.java
+│   └── Report.java
+├── controller/
+│   ├── ContentController.java
+│   ├── UserController.java
+│   └── ReportController.java
+├── view/
+│   ├── MainFrame.java
+│   ├── ContentPanel.java
+│   ├── ReportPanel.java
+│   ├── LoginDialog.java
+│   ├── ContentDialog.java
+│   └── BasePanel.java
+├── interfaces/
+│   ├── IPublishable.java
+│   ├── IManageable.java
+│   └── ISearchable.java
+└── Main.java
