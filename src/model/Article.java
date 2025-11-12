@@ -6,7 +6,7 @@ import java.util.Date;
  * Representa un artículo académico o blog.
  * Hereda de Content.
  * 
- * @author ...
+ * @author Junior...
  * @version 1.0
  */
 public class Article extends Content {

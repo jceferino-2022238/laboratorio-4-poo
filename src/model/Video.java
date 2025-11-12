@@ -6,7 +6,7 @@ import java.util.Date;
  * Representa contenido de video.
  * Hereda de Content.
  * 
- * @author ...
+ * @author Junior...
  * @version 1.0
  */
 public class Video extends Content {

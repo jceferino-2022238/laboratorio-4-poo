@@ -11,7 +11,7 @@ import java.util.UUID;
  * Define atributos y comportamientos comunes.
  * Implementa IPublishable.
  * 
- * @author ...
+ * @author Junior...
  * @version 1.0
  */
 public abstract class Content implements IPublishable {
