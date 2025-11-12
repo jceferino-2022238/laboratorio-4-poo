@@ -1,5 +1,5 @@
 src/
-├── model/
+├── model - Junior - Ceferino/
 │   ├── Content.java
 │   ├── Article.java
 │   ├── Video.java
@@ -10,18 +10,18 @@ src/
 │   ├── Category.java
 │   ├── Tag.java
 │   └── Report.java
-├── controller/
+├── controller - Ceferino - Paiz/
 │   ├── ContentController.java
 │   ├── UserController.java
 │   └── ReportController.java
-├── view/
+├── view - Paiz/
 │   ├── MainFrame.java
 │   ├── ContentPanel.java
 │   ├── ReportPanel.java
 │   ├── LoginDialog.java
 │   ├── ContentDialog.java
 │   └── BasePanel.java
-├── interfaces/
+├── interfaces - Junior/
 │   ├── IPublishable.java
 │   ├── IManageable.java
 │   └── ISearchable.java
