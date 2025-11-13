@@ -2,28 +2,14 @@ package model;
 
 import java.util.Date;
 
-/**
- * Representa contenido de imagen.
- * Hereda de Content y agrega propiedades específicas de archivos gráficos.
- * 
- * @author Ceferino, Paiz, Junior
- * @version 1.0
- */
+// Esta clase representa a una imagen como un tipo de contenido.
 public class Image extends Content {
     private String url;
     private String dimensions; // formato "WIDTHxHEIGHT"
-    private String format; // JPG, PNG, GIF, etc.
+    private String format; 
     
-    /**
-     * Constructor de Image.
-     * 
-     * @param title título de la imagen
-     * @param author autor de la imagen
-     * @param category categoría de la imagen
-     * @param url URL del archivo de imagen
-     * @param dimensions dimensiones (ej: "1920x1080")
-     * @param format formato de archivo (ej: "PNG")
-     */
+    
+    // Constructor de Image.
     public Image(String title, String author, Category category, String url, String dimensions, String format) {
         super(title, author, category);
         this.url = url;
@@ -31,9 +17,7 @@ public class Image extends Content {
         this.format = format.toUpperCase();
     }
     
-    /**
-     * Publica la imagen validando que tenga URL y formato válidos.
-     */
+    // Método para publicar la imagen.
     @Override
     public void publish() {
         if (url != null && !url.trim().isEmpty() && format != null) {
@@ -42,11 +26,7 @@ public class Image extends Content {
         }
     }
     
-    /**
-     * Retorna representación visual de la imagen.
-     * 
-     * @return string con información de la imagen
-     */
+    // Método para mostrar información de la imagen.
     @Override
     public String display() {
         StringBuilder sb = new StringBuilder();
@@ -60,30 +40,20 @@ public class Image extends Content {
         return sb.toString();
     }
     
-    /**
-     * Calcula el tamaño estimado del archivo en bytes.
-     * Esta es una estimación simplificada basada en dimensiones.
-     * 
-     * @return tamaño estimado en bytes
-     */
+    // Calcula el tamaño del archivo en bytes (estimado).
     public long getFileSize() {
         try {
             String[] parts = dimensions.split("x");
             int width = Integer.parseInt(parts[0]);
             int height = Integer.parseInt(parts[1]);
             
-            // Estimación simple: 3 bytes por pixel (RGB) con compresión 50%
             return (long) (width * height * 3 * 0.5);
         } catch (Exception e) {
             return 0;
         }
     }
     
-    /**
-     * Obtiene el tamaño formateado en KB o MB.
-     * 
-     * @return string con tamaño formateado
-     */
+    // Obtiene el tamaño del archivo en formato legible.
     public String getFormattedFileSize() {
         long bytes = getFileSize();
         if (bytes < 1024) {

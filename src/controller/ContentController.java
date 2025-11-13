@@ -7,41 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Controlador que gestiona todas las operaciones sobre contenidos.
- * Implementa IManageable e ISearchable para garantizar funcionalidad CRUD y búsqueda.
- * Utiliza polimorfismo para manejar diferentes tipos de Content.
- * 
- * @author Ceferino, Paiz, Junior
- * @version 1.0
- */
+// Controlador que gestiona la creación, edición, eliminación y búsqueda de contenidos.
 public class ContentController implements IManageable<Content>, ISearchable<Content> {
     private List<Content> contentList;
     private User currentUser;
     
-    /**
-     * Constructor del controlador.
-     */
+    // Constructor de ContentController.
     public ContentController() {
         this.contentList = new ArrayList<>();
         this.currentUser = null;
     }
     
-    /**
-     * Establece el usuario actual para validar permisos.
-     * 
-     * @param user usuario actual
-     */
+    // Establece el usuario actual para verificar permisos.
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
     
-    /**
-     * Crea un nuevo contenido en el sistema.
-     * Utiliza polimorfismo - funciona con Article, Video, Image.
-     * 
-     * @param content contenido a crear
-     */
+    // Crea un nuevo contenido.
     @Override
     public void create(Content content) {
         if (currentUser != null && currentUser.getPermissions().contains("CREATE")) {
@@ -49,11 +31,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
         }
     }
     
-    /**
-     * Edita un contenido existente.
-     * 
-     * @param content contenido con datos actualizados
-     */
+    // Edita un contenido existente.
     @Override
     public void edit(Content content) {
         if (currentUser != null && currentUser.getPermissions().contains("EDIT")) {
@@ -65,12 +43,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
         }
     }
     
-    /**
-     * Elimina un contenido por su ID.
-     * 
-     * @param id identificador del contenido
-     * @return true si se eliminó correctamente
-     */
+    // Elimina un contenido por su ID.
     @Override
     public boolean delete(String id) {
         if (currentUser != null && currentUser.getPermissions().contains("DELETE")) {
@@ -87,12 +60,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
         return false;
     }
     
-    /**
-     * Obtiene un contenido por su ID.
-     * 
-     * @param id identificador del contenido
-     * @return contenido encontrado o null
-     */
+    // Obtiene un contenido por su ID.
     @Override
     public Content getById(String id) {
         return contentList.stream()
@@ -101,13 +69,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
                 .orElse(null);
     }
     
-    /**
-     * Publica un contenido.
-     * Utiliza polimorfismo - cada tipo (Article/Video/Image) ejecuta su propio publish().
-     * 
-     * @param id identificador del contenido
-     * @return true si se publicó correctamente
-     */
+    // Publica un contenido.
     public boolean publishContent(String id) {
         if (currentUser != null && currentUser.getPermissions().contains("PUBLISH")) {
             Content content = getById(id);
@@ -119,12 +81,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
         return false;
     }
     
-    /**
-     * Despublica un contenido.
-     * 
-     * @param id identificador del contenido
-     * @return true si se despublicó correctamente
-     */
+    // Despublica un contenido.
     public boolean unpublishContent(String id) {
         if (currentUser != null && currentUser.getPermissions().contains("PUBLISH")) {
             Content content = getById(id);
@@ -136,12 +93,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
         return false;
     }
     
-    /**
-     * Busca contenidos por palabra clave en título o autor.
-     * 
-     * @param keyword palabra clave
-     * @return lista de contenidos que coinciden
-     */
+    // Busca contenidos por palabra clave en título o autor.
     @Override
     public List<Content> searchByKeyword(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
@@ -155,12 +107,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
                 .collect(Collectors.toList());
     }
     
-    /**
-     * Filtra contenidos por categoría.
-     * 
-     * @param category categoría para filtrar
-     * @return lista de contenidos de esa categoría
-     */
+    // Filtra contenidos por categoría.
     @Override
     public List<Content> filterByCategory(Category category) {
         if (category == null) {
@@ -172,13 +119,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
                 .collect(Collectors.toList());
     }
     
-    /**
-     * Filtra contenidos por tipo (Article, Video, Image).
-     * Demuestra polimorfismo: trabaja con la jerarquía de Content.
-     * 
-     * @param type tipo de contenido
-     * @return lista de contenidos de ese tipo
-     */
+    // Filtra contenidos por tipo (Artículo, Video, Imagen).
     @Override
     public List<Content> filterByType(String type) {
         if (type == null || type.equals("Todos")) {
@@ -190,12 +131,7 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
                 .collect(Collectors.toList());
     }
     
-    /**
-     * Filtra contenidos por etiqueta.
-     * 
-     * @param tag etiqueta para filtrar
-     * @return lista de contenidos con esa etiqueta
-     */
+    // Filtra contenidos por etiqueta (tag).
     @Override
     public List<Content> filterByTag(Tag tag) {
         if (tag == null) {
@@ -207,32 +143,19 @@ public class ContentController implements IManageable<Content>, ISearchable<Cont
                 .collect(Collectors.toList());
     }
     
-    /**
-     * Obtiene todos los contenidos.
-     * 
-     * @return lista completa de contenidos
-     */
+    // Obtiene todos los contenidos.
     public List<Content> getAllContent() {
         return new ArrayList<>(contentList);
     }
     
-    /**
-     * Obtiene solo contenidos publicados.
-     * 
-     * @return lista de contenidos publicados
-     */
+    // Obtiene solo los contenidos publicados.
     public List<Content> getPublishedContent() {
         return contentList.stream()
                 .filter(Content::isPublished)
                 .collect(Collectors.toList());
     }
     
-    /**
-     * Obtiene contenidos por estado.
-     * 
-     * @param status estado ("DRAFT" o "PUBLISHED")
-     * @return lista de contenidos con ese estado
-     */
+    // Obtiene contenidos por estado (PUBLISHED, DRAFT).
     public List<Content> getContentByStatus(String status) {
         return contentList.stream()
                 .filter(c -> c.getStatus().equals(status))

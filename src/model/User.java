@@ -4,13 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Clase abstracta base para todos los tipos de usuarios.
- * Define autenticación común que heredan Administrator y Editor.
- * 
- * @author Ceferino, Paiz, Junior
- * @version 1.0
- */
+// Clase abstracta que representa a un usuario del sistema.
 public abstract class User {
     protected String userId;
     protected String username;
@@ -19,14 +13,7 @@ public abstract class User {
     protected String role;
     protected Date registrationDate;
     
-    /**
-     * Constructor base para usuarios.
-     * 
-     * @param username nombre de usuario
-     * @param password contraseña
-     * @param email correo electrónico
-     * @param role rol del usuario
-     */
+    // Constructor de User.
     public User(String username, String password, String email, String role) {
         this.userId = UUID.randomUUID().toString();
         this.username = username;
@@ -36,40 +23,20 @@ public abstract class User {
         this.registrationDate = new Date();
     }
     
-    /**
-     * Autentica al usuario validando la contraseña.
-     * 
-     * @param password contraseña a validar
-     * @return true si la contraseña es correcta
-     */
+    // Método para autenticar al usuario.
     public boolean authenticate(String password) {
         return this.password.equals(password);
     }
     
-    /**
-     * Método abstracto para obtener permisos del usuario.
-     * Cada subclase define sus propios permisos.
-     * 
-     * @return lista de permisos
-     */
+    // Método abstracto para obtener los permisos del usuario.
     public abstract List<String> getPermissions();
     
-    /**
-     * Actualiza la información del perfil.
-     * 
-     * @param email nuevo email
-     */
+    // Método para actualizar el perfil del usuario.
     public void updateProfile(String email) {
         this.email = email;
     }
     
-    /**
-     * Cambia la contraseña del usuario.
-     * 
-     * @param oldPassword contraseña anterior
-     * @param newPassword nueva contraseña
-     * @return true si se cambió correctamente
-     */
+    // Método para cambiar la contraseña del usuario.
     public boolean changePassword(String oldPassword, String newPassword) {
         if (authenticate(oldPassword)) {
             this.password = newPassword;

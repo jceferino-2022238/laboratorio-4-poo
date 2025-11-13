@@ -2,23 +2,14 @@ package model;
 
 import java.util.*;
 
-/**
- * Genera reportes y estadísticas sobre los contenidos publicados.
- * 
- * @author Ceferino, Paiz, Junior
- * @version 1.0
- */
+// Clase para representar reportes generados en el sistema.
 public class Report {
     private String reportId;
     private String reportType;
     private Date generationDate;
     private Map<String, Object> data;
     
-    /**
-     * Constructor de Report.
-     * 
-     * @param reportType tipo de reporte
-     */
+   // Constructor de Report.
     public Report(String reportType) {
         this.reportId = UUID.randomUUID().toString();
         this.reportType = reportType;
@@ -26,21 +17,12 @@ public class Report {
         this.data = new HashMap<>();
     }
     
-    /**
-     * Agrega un dato al reporte.
-     * 
-     * @param key clave del dato
-     * @param value valor del dato
-     */
+    // Agrega un dato al reporte.
     public void addData(String key, Object value) {
         data.put(key, value);
     }
     
-    /**
-     * Genera resumen del reporte en formato texto.
-     * 
-     * @return string con el resumen
-     */
+    // Genera un resumen del reporte.
     public String generateSummary() {
         StringBuilder sb = new StringBuilder();
         sb.append("=== REPORTE: ").append(reportType).append(" ===\n");
@@ -53,11 +35,7 @@ public class Report {
         return sb.toString();
     }
     
-    /**
-     * Exporta el reporte a formato CSV.
-     * 
-     * @return string en formato CSV
-     */
+    // Exporta el reporte en formato CSV.
     public String exportToCSV() {
         StringBuilder csv = new StringBuilder();
         csv.append("Clave,Valor\n");
