@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Representa una categoría para clasificar contenidos.
- * Permite organización jerárquica con categorías padre e hijas.
- * 
- * @author Junior...
- * @version 1.0
- */
+// Clase para representar categorías de contenido
+// Autor: Junior | Versión: 2.0
 public class Category {
     private String categoryId;
     private String name;
@@ -18,7 +13,8 @@ public class Category {
     private Category parentCategory;
     private List<Category> subcategories;
     private int contentCount;
-    
+
+    // Constructor con ID automático
     public Category(String name, String description) {
         this.categoryId = UUID.randomUUID().toString();
         this.name = name;
@@ -27,24 +23,28 @@ public class Category {
         this.subcategories = new ArrayList<>();
         this.contentCount = 0;
     }
-    
+
+    // Agrega una subcategoría
     public void addSubcategory(Category category) {
         if (category != null && !subcategories.contains(category)) {
             subcategories.add(category);
             category.setParentCategory(this);
         }
     }
-    
+
+    // Incrementa el número de contenidos
     public void incrementContentCount() {
         this.contentCount++;
     }
-    
+
+    // Decrementa el número de contenidos
     public void decrementContentCount() {
         if (this.contentCount > 0) {
             this.contentCount--;
         }
     }
-    
+
+    // Getters y Setters principales
     public String getCategoryId() { return categoryId; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -54,10 +54,10 @@ public class Category {
     public void setParentCategory(Category parentCategory) { this.parentCategory = parentCategory; }
     public List<Category> getSubcategories() { return new ArrayList<>(subcategories); }
     public int getContentCount() { return contentCount; }
-    
+
     @Override
     public String toString() { return name; }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -65,9 +65,7 @@ public class Category {
         Category category = (Category) obj;
         return categoryId.equals(category.categoryId);
     }
-    
+
     @Override
-    public int hashCode() {
-        return categoryId.hashCode();
-    }
+    public int hashCode() { return categoryId.hashCode(); }
 }
